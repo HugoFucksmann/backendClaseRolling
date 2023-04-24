@@ -13,6 +13,8 @@ app.use(express.json());
 dbConnection();
 
 app.use("/api/productos", require("./routes/productos"));
+app.use("/api/carrito", require("./routes/carrito"));
+app.use("/api/usuario", require("./routes/usuario"));
 
 app.listen(PORT, () => {
   console.log("server iniciado en puert: ", PORT);

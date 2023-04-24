@@ -54,7 +54,7 @@ const putProductos = async (req, res) => {
     }
 
     const productoActualizado = await Producto.findByIdAndUpdate(
-      idProducto,
+      { _id: idProducto },
       productoAEditar,
       {
         new: true,

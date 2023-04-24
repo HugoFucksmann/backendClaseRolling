@@ -5,6 +5,7 @@ const {
   putProductos,
   deleteProductos,
 } = require("../controllers/productos");
+const { verificarJWT } = require("../utils/jwt");
 
 /* 
 path: api/productos
@@ -14,10 +15,10 @@ const router = Router();
 
 router.get("/", getProductos);
 
-router.post("/", postProductos);
+router.post("/", verificarJWT, postProductos);
 
-router.put("/:idProducto", putProductos);
+router.put("/:idProducto", verificarJWT, putProductos);
 
-router.delete("/:idProducto", deleteProductos);
+router.delete("/:idProducto", verificarJWT, deleteProductos);
 
 module.exports = router;
