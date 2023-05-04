@@ -15,7 +15,7 @@ const router = Router();
 
 router.get("/", getProductos);
 
-router.post("/", verificarJWT, postProductos);
+router.post("/", postProductos);
 
 router.put("/:idProducto", verificarJWT, putProductos);
 

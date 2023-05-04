@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { resolve } = require("path");
 
 const generarJWT = async (uid) => {
   return new Promise((resolve, reject) => {

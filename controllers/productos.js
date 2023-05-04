@@ -22,8 +22,8 @@ const postProductos = async (req, res) => {
     const newProducto = new Producto({
       ...req.body,
     });
-
-    const newProductoBBDD = await newProducto.save();
+    console.log("newProducto ", newProducto);
+    await newProducto.save();
 
     res.json({
       ok: true,

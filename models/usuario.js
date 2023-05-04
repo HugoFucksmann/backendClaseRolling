@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// aws s3 buckets
+
 const UsuarioSchema = new mongoose.Schema(
   {
     user: {
@@ -10,12 +12,16 @@ const UsuarioSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    img: {
+      type: String,
+      default: "",
+    },
   },
   { collection: "usuarios" }
 );
 
 UsuarioSchema.method("toJSON", function () {
-  const { __v, ...object } = this.toObject();
+  const { __v, password, ...object } = this.toObject();
 
   return object;
 });

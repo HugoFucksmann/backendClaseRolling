@@ -2,18 +2,18 @@ const bcrypt = require("bcryptjs");
 const Usuario = require("../models/usuario");
 const { generarJWT } = require("../utils/jwt");
 const { validationResult } = require("express-validator");
+
 const loginUsuario = async (req, res) => {
   const { user, password } = req.body;
   try {
     const usuarioDB = await Usuario.findOne({ user });
 
     if (!usuarioDB) {
-      return res.json({
+      return res.status(500).json({
         ok: false,
         msj: "usuario no encontrado",
       });
     }
-
     const validarPassword = await bcrypt.compare(password, usuarioDB.password);
 
     if (!validarPassword) {
@@ -42,11 +42,12 @@ const loginUsuario = async (req, res) => {
 const registrarUsuario = async (req, res) => {
   const errors = validationResult(req);
   const { user, password } = req.body;
-  let msj;
+
   if (!errors.isEmpty()) {
-    //errors.array()
+    //analizar error para personalizar msj
 
     return res.status(400).json({
+      ok: false,
       errors: errors.array(),
       msj: "usuario o contraseña incorrecta",
     });
@@ -60,6 +61,7 @@ const registrarUsuario = async (req, res) => {
         msj: "usuario ya registrado",
       });
     }
+
     const passwordEncrypt = await bcrypt.hash(password, 12);
 
     const newUser = new Usuario({
@@ -70,7 +72,7 @@ const registrarUsuario = async (req, res) => {
 
     res.json({
       ok: true,
-      msj: "se creo usuario co exito",
+      msj: "se creo usuario con exito",
       usuario: newUser,
     });
   } catch (error) {
