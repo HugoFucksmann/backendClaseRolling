@@ -43,7 +43,7 @@ const postItemCarrito = async (req, res) => {
     });
 
     const newCarritoBBDD = await newCarrito.save();
-
+    console.log("newCarritoBBDD ", newCarritoBBDD);
     res.json({
       ok: true,
       msj: "se actualizo el carrito",
